@@ -4,20 +4,6 @@ from google.genai import types
 import os
 from dotenv import load_dotenv
 import json
-import imghdr
-
-# helpers
-def detect_mime(data: bytes) -> str:
-    # PDF
-    if data.startswith(b"%PDF"):
-        return "application/pdf"
-
-    # images
-    img = imghdr.what(None, h=data)
-    if img:
-        return f"image/{img}"
-
-    return "application/octet-stream"
 
 # setup
 load_dotenv()
@@ -46,9 +32,8 @@ def analyze():
 
         # read bytes
         file_bytes = uploaded_file.read()
-
         # detect correct mime
-        mime_type = detect_mime(file_bytes)
+        mime_type = uploaded_file.mimetype  # THIS replaces imghdr
 
         print("Detected mime:", mime_type)
 
@@ -95,5 +80,4 @@ def analyze():
 
 # run
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5050))
-    app.run(host="0.0.0.0", port=port)
+    app.run()
