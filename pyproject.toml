@@ -1,0 +1,15 @@
+[project]
+name = "skillscan-backend"
+version = "0.1.0"
+description = "Flask API for resume analysis via Google Gemini"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "flask>=3.0.0",
+  "python-dotenv>=1.0.0",
+  "google-genai>=1.0.0",
+  "gunicorn>=23.0.0",
+]
+
+[tool.uv]
+dev-dependencies = []
